@@ -43,9 +43,9 @@ const ProductCard = ({ product }: { product: ProductType }) => {
     <div className="shadow-lg rounded-lg overflow-hidden">
       {/* IMAGE */}
       <Link href={`/products/${product.id}`}>
-        <div className="relative aspect-[2/3]">
-          <Image
-            src={product.images[productTypes.color]}
+        <div className="relative aspect-2/3">
+          <Image  
+            src={product.images[productTypes.color] || ""}
             alt={product.name}
             fill
             className="object-cover hover:scale-105 transition-all duration-300"
@@ -82,7 +82,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
             <div className="flex items-center gap-2">
               {product.colors.map((color) => (
                 <div
-                  className={`cursor-pointer border-1 ${
+                  className={`cursor-pointer border ${
                     productTypes.color === color
                       ? "border-gray-400"
                       : "border-gray-200"
@@ -93,7 +93,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
                   }
                 >
                   <div
-                    className="w-[14px] h-[14px] rounded-full"
+                    className="w-3.5 h-3.5 rounded-full"
                     style={{ backgroundColor: color }}
                   />
                 </div>
