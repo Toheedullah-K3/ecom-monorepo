@@ -1,4 +1,4 @@
-import express from "express"
+import express, { Request, Response } from "express"
 import cors from "cors"
 
 
@@ -11,10 +11,10 @@ app.use(cors({
 }))
 
 
-app.get("/", (req, res) => {
-  res.send("Hello World!")
+app.get("/", (req: Request, res: Response) => {
+  res.json("Product endpoint Works!!")
 })
 
-app.listen(8000, () => {
-  console.log("Server is listening on port 8000!")
+app.listen(8000, () => { 
+  console.log("Product service port 8001!")
 })
