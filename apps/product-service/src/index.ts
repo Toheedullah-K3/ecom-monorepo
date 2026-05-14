@@ -16,5 +16,5 @@ app.get("/", (req: Request, res: Response) => {
 })
 
 app.listen(8000, () => { 
-  console.log("Product service port 8001!")
+  console.log("Product service port 8000!")
 })

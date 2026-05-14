@@ -4,14 +4,14 @@ import { Hono } from 'hono'
 const app = new Hono()
 
 app.get('/', (c) => {
-  return c.text('Hello Hono!')
+  return c.text('Hello from Payment Service!')
 })
 
 const start = async () => {
   try {
     serve({
       fetch: app.fetch,
-      port: 3000
+      port: 8002
     }, (info) => {
       console.log(`Payment service is running on http://localhost:${info.port}`)
     })
