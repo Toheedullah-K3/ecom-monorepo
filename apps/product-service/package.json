@@ -17,6 +17,7 @@
     "@types/express": "^5.0.6"
   },
   "dependencies": {
+    "@clerk/express": "^2.1.16",
     "cors": "^2.8.6",
     "express": "^5.2.1"
   }
