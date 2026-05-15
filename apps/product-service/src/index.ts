@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express"
 import cors from "cors"
 import { clerkMiddleware, getAuth } from '@clerk/express'
+import { shouldBeUser } from "./middleware/authMiddleware.js"
 
 
 const app = express()
@@ -18,14 +19,8 @@ app.get("/", (req: Request, res: Response) => {
   res.json("Product endpoint Works!!")
 })
 
-app.get("/test", (req: Request, res: Response) => {
-  const auth = getAuth(req)
-
-  if (!auth.isAuthenticated) {
-    return res.status(401).send('User not authenticated')
-  }
-  console.log("Authenticated user:", auth)
-  return res.json(auth)
+app.get("/test", shouldBeUser, (req: Request, res: Response) => {
+  res.json({ message: "Test endpoint works!", userId: req.userId })
 })
 
 app.listen(8000, () => {
