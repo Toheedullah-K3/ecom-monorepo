@@ -1,5 +1,6 @@
 import Fastify from "fastify";
 import { clerkPlugin, getAuth } from '@clerk/fastify'
+import { shouldBeUser } from "./middleware/authMiddleware.js";
 
 const fastify = Fastify();
 
@@ -10,14 +11,8 @@ fastify.get("/", async (request, reply) => {
   return { message: "Hello from order-service!" };
 });
 
-fastify.get("/test", async (request, reply) => {
-  const { userId } = getAuth(request);
-  
-  if(!userId){
-    return reply.status(401).send({ message: "Unauthorized" });
-  } 
-
-  return { message: `Hello, user ${userId}! This is a protected route.` };
+fastify.get("/test", {preHandler: shouldBeUser}, async (request, reply) => {
+  return reply.send({ message: `Hello user ${request.userId} from order-service!` });
 });
 
 const start = async () => {

@@ -15,7 +15,7 @@ export const shouldBeUser = async (req: Request, res: Response, next: NextFuncti
     const userId = auth.userId
 
     if (!auth.isAuthenticated) {
-        return res.status(401).send('User not authenticated')
+        return res.status(401).send({ message: "Unauthorized" })
     }
     req.userId = userId ?? undefined
 

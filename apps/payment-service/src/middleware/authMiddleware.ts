@@ -7,10 +7,13 @@ export const shouldBeUser = createMiddleware<{
         userId: string
     }
 }>(async (c, next) => {
+
   const { userId } = getAuth(c)
     if (!userId) {
         return c.json({ message: 'Unauthorized' }, 401)
     }
+
     c.set("userId", userId)
     await next()
+
 })
