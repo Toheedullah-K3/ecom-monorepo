@@ -11,7 +11,7 @@ fastify.get("/", async (request, reply) => {
   return { message: "Hello from order-service!" };
 });
 
-fastify.get("/test", {preHandler: shouldBeUser}, async (request, reply) => {
+fastify.get("/test", { preHandler: async (request, reply) => { await shouldBeUser(request, reply); } }, async (request, reply) => {
   return reply.send({ message: `Hello user ${request.userId} from order-service!` });
 });
 
